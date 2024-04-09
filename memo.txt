@@ -1,0 +1,9 @@
+以下のように作成する
+
+ページ:
+    作品一覧: ArtworkGallery
+        作品の一つ一つ: ArtworkCard
+
+    作品内容: ContentsList
+        作品の一枚一枚: contentsCard
+        
