@@ -3,7 +3,9 @@
 ページ:
     作品一覧: ArtworkGallery
         作品の一つ一つ: ArtworkCard
+            サーバーサイド: [どの五枚をフロントに渡すか, 表示する作品名, 総枚数]
+        何ページ目にどの作品を表示するようにするか管理: GalleryManager (サーバーサイド)
 
     作品内容: ContentsList
-        作品の一枚一枚: contentsCard
+        作品内容の一枚一枚: contentsCard
         
