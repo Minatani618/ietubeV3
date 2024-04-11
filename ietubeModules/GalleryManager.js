@@ -37,6 +37,7 @@ class GalleryManager {
       const pageNumber = this.determinePageNumber(i, numberOfArtworksPerPage);
       this.artworkDisplayList[pageNumber - 1].push(this.artworkList[i]);
     }
+    this.maxPage = this.artworkDisplayList.length; //最大ページをついでに算出
   };
 
   getArtworkDisplayList = () => {
@@ -46,6 +47,14 @@ class GalleryManager {
   //その作品が何ページ目に表示されるかを返す
   determinePageNumber = (ArtworksNumber, numberOfArtworksPerPage) => {
     return Math.floor(ArtworksNumber / numberOfArtworksPerPage) + 1;
+  };
+
+  getArtworkListOfPage = (pageNumber) => {
+    return this.artworkDisplayList[pageNumber - 1];
+  };
+
+  getMaxPage = () => {
+    return this.maxPage;
   };
 }
 

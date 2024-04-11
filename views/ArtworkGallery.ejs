@@ -2,9 +2,27 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/ArtworkGallery.css" />
   </head>
   <body>
-    <h1>Artwork Gallery</h1>
+    <script src="/javascripts/script.js"></script>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/ArtworkGallery/<%= page-1 %>">前へ</a>
+    <a href="/ArtworkGallery/<%= page+1 %>">次へ</a>
+    <br />
+    <% for (const artworkCard of artworkCards) { %>
+    <div class="folderContainer">
+      <a href="<%= artworkCard.artworksHref %>"><%= artworkCard.artworkName %></a>
+      <div class="thumbnails">
+        <% artworkCard.thumbnails.forEach((thumbnail)=>{ %>
+        <img src="<%= thumbnail %>" alt="" />
+        <% }) %>
+      </div>
+      <br />
+    </div>
+    <% } %>
+    <a href="/ArtworkGallery/<%= page-1 %>">前へ</a>
+    <a href="/ArtworkGallery/<%= page+1 %>">次へ</a>
   </body>
 </html>
