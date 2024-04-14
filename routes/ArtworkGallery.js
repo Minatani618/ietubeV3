@@ -1,8 +1,11 @@
 var express = require("express");
 var router = express.Router();
-const testModule = require("../ietubeModules/testModule");
 const artworkCard = require("../ietubeModules/artworkCard");
 const GalleryManager = require("../ietubeModules/GalleryManager");
+
+//ContentsListへのルーティング(このページのサブルーター)
+var contentsListRouter = require("./ContentsList");
+router.use("/ContentsList", contentsListRouter);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

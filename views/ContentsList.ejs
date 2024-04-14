@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/contentsList.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>作品名: <%= artworkName %></p>
+
+    <!-- 管理用のmeta的なdiv -->
+    <div id="metaDiv" class="meta">
+      <p id="metaArtworkName" class="meta"><%= artworkName %></p>
+      <p id="metaHrefWithoutFileName" class="meta"><%= hrefWithoutFileName %></p>
+      <p id="metaDisplayNumberPerPage" class="meta">20</p>
+      <p id="metaPageNumber" class="meta">1</p>
+      <p id="metaColNumber">3</p>
+      <div id="metaDivFileNames" class="meta">
+        <% contentCards.forEach((contentCard)=>{ %>
+        <p class="metaFileName" class="meta"><%= contentCard.fileName %></p>
+        <% }); %>
+      </div>
+      <div id="selectedList"></div>
+    </div>
+
+    <div id="buttonsContainer">
+      <div id="columnButtons">
+        <button id="column1button">1列</button>
+        <button id="column2button">2列</button>
+        <button id="column3button">3列</button>
+      </div>
+      <div id="contentsCountButtons">
+        <button id="contentsCount20button">20</button>
+        <button id="contentsCount50button">50</button>
+        <button id="contentsCount100button">100</button>
+      </div>
+      <div id="exeButtons">
+        <button id="switchButton">選択入替</button>
+        <button id="deleteButton">削除</button>
+        <button id="addFavButton">お気に入り</button>
+      </div>
+    </div>
+
+    <!-- 移動ボタン -->
+    <div class="moveButtons">
+      <button class="prevButton">前へ</button>
+      <button class="nextButton">次へ</button>
+    </div>
+
+    <!-- フロントエンドjsでコンテナを動的に生成してimgを格納 -->
+    <div id="contentDisplayContainer"></div>
+
+    <!-- 移動ボタン -->
+    <div class="moveButtons">
+      <button class="prevButton">前へ</button>
+      <button class="nextButton">次へ</button>
+    </div>
+
+    <script src="/javascripts/contentsList.js"></script>
+  </body>
+</html>

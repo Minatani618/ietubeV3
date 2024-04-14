@@ -19,7 +19,7 @@ class artworkCard {
 
   //ejsに記述するaタグのhref
   setArtworkHref() {
-    this.artworksHref = `/ContentsList/${this.artworkName}`;
+    this.artworksHref = `/ArtworkGallery/ContentsList/${this.artworkName}`;
   }
 
   //ejsに記述するimgタグのsrcに使用
