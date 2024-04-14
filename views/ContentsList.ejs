@@ -20,7 +20,7 @@
         <p class="metaFileName" class="meta"><%= contentCard.fileName %></p>
         <% }); %>
       </div>
-      <div id="selectedList"></div>
+      <!-- <div id="selectedList"></div> -->
     </div>
 
     <div id="buttonsContainer">
@@ -36,7 +36,11 @@
       </div>
       <div id="exeButtons">
         <button id="switchButton">選択入替</button>
-        <button id="deleteButton">削除</button>
+
+        <form action="<%= thisPagePath %>" method="post" id="deleteForm">
+          <button id="deleteButton" class="btn btn-secondary">削除</button>
+        </form>
+
         <button id="addFavButton">お気に入り</button>
       </div>
     </div>

@@ -17,7 +17,7 @@ router.get("/:page", (req, res, next) => {
 
   //ページ数指定が0以下の時は1としてリダイレクト
   if (page <= 0) {
-    res.redirect("/ArtworksGallery/1");
+    res.redirect("/ArtworkGallery/1");
     return;
   }
 
@@ -41,7 +41,7 @@ router.get("/:page", (req, res, next) => {
   }
 
   //ページ描画
-  res.render("ArtworkGallery", { title: "Express", artworkCards: artworkCards, page: page });
+  res.render("ArtworkGallery", { title: "ietube: Artwork Gallery", artworkCards: artworkCards, page: page });
 });
 
 module.exports = router;

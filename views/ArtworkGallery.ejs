@@ -7,13 +7,20 @@
   <body>
     <script src="/javascripts/script.js"></script>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <a href="/ArtworkGallery/<%= page-1 %>">前へ</a>
-    <a href="/ArtworkGallery/<%= page+1 %>">次へ</a>
+    <p>page: <%= page %></p>
+    <div>
+      <a href="/ArtworkGallery/<%= parseInt(page)-1 %>">前へ</a>
+      <a href="/ArtworkGallery/<%= parseInt(page)+1 %>">次へ</a>
+    </div>
+    <div>
+      <a href="/ArtworkGallery/<%= parseInt(page)-10 %>">前へ -10</a>
+      <a href="/ArtworkGallery/<%= parseInt(page)+10 %>">次へ +10</a>
+    </div>
     <br />
     <% for (const artworkCard of artworkCards) { %>
     <div class="folderContainer">
       <a href="<%= artworkCard.artworksHref %>"><%= artworkCard.artworkName %></a>
+      <p class="contentcount">コンテンツ数: <%= artworkCard.contentsCount %></p>
       <div class="thumbnails">
         <% artworkCard.thumbnails.forEach((thumbnail)=>{ %>
         <img src="<%= thumbnail %>" alt="" />
@@ -22,7 +29,14 @@
       <br />
     </div>
     <% } %>
-    <a href="/ArtworkGallery/<%= page-1 %>">前へ</a>
-    <a href="/ArtworkGallery/<%= page+1 %>">次へ</a>
+    <div>
+      <a href="/ArtworkGallery/<%= parseInt(page)-1 %>">前へ</a>
+      <a href="/ArtworkGallery/<%= parseInt(page)+1 %>">次へ</a>
+    </div>
+    <div>
+      <a href="/ArtworkGallery/<%= parseInt(page)-10 %>">前へ -10</a>
+      <a href="/ArtworkGallery/<%= parseInt(page)+10 %>">次へ +10</a>
+    </div>
+    <div></div>
   </body>
 </html>

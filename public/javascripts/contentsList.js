@@ -6,7 +6,7 @@ const contentFileNames = metaDivFileNames.getElementsByClassName("metaFileName")
 const pageNumber = document.getElementById("metaPageNumber");
 const displayNumberPerPage = document.getElementById("metaDisplayNumberPerPage");
 const hrefWithoutFileName = document.getElementById("metaHrefWithoutFileName");
-const selectedList = document.getElementById("selectedList");
+/* const selectedList = document.getElementById("selectedList"); */
 const colNumber = document.getElementById("metaColNumber");
 
 const contentDisplayContainer = document.getElementById("contentDisplayContainer");
@@ -52,7 +52,9 @@ class contentsManager {
 
   displayImgs() {
     for (let i = this.displayRange.start; i < this.displayRange.end; i++) {
-      this.createContentImg(this.contentFileNames[i]);
+      if (this.contentFileNames[i] !== undefined) {
+        this.createContentImg(this.contentFileNames[i]);
+      }
     }
   }
 
@@ -105,22 +107,50 @@ const changeColumnNumber = (column) => {
 };
 
 //【イベントリスナ用】imgに選択クラスを追加
-const addSelectClass = (img) => {
-  img.classList.toggle("selected");
+const addSelectClass = (imgDiv) => {
+  imgDiv.classList.toggle("selected");
 };
 
-//【イベントリスナ用】selectedクラスを持つimgを管理用divにまとめる
-const listSelectedImgs = () => {
-  const selectedImgDiv = contentDisplayContainer.getElementsByClassName("selected");
+//【イベントリスナ用】selectedクラスを持つ者と持たないもので入れ替える
+const switchSelectedImgs = () => {
+  const selectedImgDiv = contentDisplayContainer.getElementsByTagName("div");
   for (let i = 0; i < selectedImgDiv.length; i++) {
-    const selectedImgSrc = selectedImgDiv[i].getElementsByTagName("img")[0].src;
-    console.log(selectedImgSrc);
-    const selectedImgFileName = selectedImgSrc.split("/").pop();
-    const p = document.createElement("p");
-    p.textContent = selectedImgFileName;
-    selectedList.appendChild(p);
+    console.log(selectedImgDiv[i]);
+    selectedImgDiv[i].classList.toggle("selected");
   }
 };
+
+//【イベントリスナ用】selectedクラスを持つ者を削除
+const deleteSelectedContents = async (event) => {
+  event.preventDefault(); // ボタンを押したときのデフォルトのフォーム送信を防ぐ
+  const selectedContents = await listSelectedImgs();
+
+  //input要素作成追加
+  const deleteInput = document.createElement("input");
+  deleteInput.name = "delete";
+  deleteInput.value = selectedContents;
+  deleteInput.type = "hidden";
+  const deleteForm = document.getElementById("deleteForm");
+  deleteForm.appendChild(deleteInput);
+
+  //POST送信
+  deleteForm.submit();
+};
+
+//【イベントリスナ用】selectedクラスを持つdiv内のimgのsrcファイル名をリスト化して文字列として返す
+const listSelectedImgs = () => {
+  return new Promise((resolve, reject) => {
+    const selectedImgDiv = contentDisplayContainer.getElementsByClassName("selected");
+    let selectedListStrings = "";
+    for (let i = 0; i < selectedImgDiv.length; i++) {
+      const selectedImgSrc = selectedImgDiv[i].getElementsByTagName("img")[0].src;
+      const selectedImgFileName = selectedImgSrc.split("/").pop();
+      selectedListStrings += selectedImgFileName + ",";
+    }
+    resolve(selectedListStrings);
+  });
+};
+
 // ↑ 【イベントリスナ用】----------------------------------------------------------
 
 //ページ数と1ページあたりの表示数を指定して表示を更新
@@ -172,7 +202,8 @@ contentCount50button.onclick = () => updateDisplay(50, currentPageNumber);
 contentsCount100button.onclick = () => updateDisplay(100, currentPageNumber);
 
 //機能ボタンにイベントリスナーを追加
-switchButton.onclick = () => listSelectedImgs();
+switchButton.onclick = () => switchSelectedImgs();
+deleteButton.onclick = (event) => deleteSelectedContents(event);
 
 //初期表示
 updateDisplay(currentDisplayNumberPerPage, currentPageNumber);

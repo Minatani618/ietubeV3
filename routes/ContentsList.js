@@ -3,31 +3,39 @@ var express = require("express");
 var router = express.Router();
 const contentsManager = require("../ietubeModules/contentsManager");
 
-//ページ数なしの時は1としてリダイレクト
 router.get("/:artworkName", function (req, res, next) {
   const artworkName = req.params.artworkName;
-  res.redirect(`/ArtworkGallery/ContentsList/${artworkName}/1`);
-});
-
-router.get("/:artworkName/:page", function (req, res, next) {
-  const artworkName = req.params.artworkName;
-  const page = req.params.page;
-
-  //ページ数指定が0以下の時は1としてリダイレクト
-  if (page <= 0) {
-    res.redirect(`/ArtworkGallery/${artworkName}/1`);
-    return;
-  }
 
   const manager = new contentsManager(artworkName);
+  manager.createContentCardList();
   const hrefWithoutFileName = manager.getHrefWithoutFileName();
   const contentCards = manager.getContentsCards();
+  const thisPagePath = `/ArtworkGallery/ContentsList/${artworkName}/`;
   res.render("ContentsList", {
     title: "Contents List",
     artworkName: artworkName,
     hrefWithoutFileName: hrefWithoutFileName,
     contentCards: contentCards,
+    thisPagePath: thisPagePath,
   });
+});
+
+router.post("/:artworkName", function (req, res, next) {
+  const artworkName = req.params.artworkName;
+  const reqBody = req.body;
+  const deleteContentsStrings = reqBody.delete;
+
+  const manager = new contentsManager(artworkName);
+
+  //削除の場合
+  if (deleteContentsStrings != undefined) {
+    manager.deleteContents(deleteContentsStrings);
+  }
+
+  //お気に入り登録の場合（未実装）
+
+  //getでリダイレクト
+  res.redirect(`/ArtworkGallery/ContentsList/${req.params.artworkName}/`);
 });
 
 module.exports = router;
