@@ -66,6 +66,7 @@ class contentsManager {
     return this.hrefWithoutFileName;
   }
 
+  //削除対象のコンテンツを削除する
   deleteContents(deleteContentsStrings) {
     const deleteContents = deleteContentsStrings.split(",");
     for (let i = 0; i < deleteContents.length; i++) {
@@ -76,6 +77,32 @@ class contentsManager {
       const newDeleteContentPath = path.join(this.targetArtworkPath, "deleted_" + deleteContents[i]);
       console.log("oldDeleteContentPath: " + oldDeleteContentPath);
       fs.renameSync(oldDeleteContentPath, newDeleteContentPath);
+    }
+  }
+
+  //お気に入り対象のコンテンツをお気に入り登録or解除する
+  addFavContents(addFavContentsStrings) {
+    const addFavContents = addFavContentsStrings.split(",");
+    for (let i = 0; i < addFavContents.length; i++) {
+      if (addFavContents[i] == "") {
+        continue;
+      }
+
+      //fav_が含まれている場合は削除、含まれていない場合は追加
+      let oldFileName = "";
+      let newFileName = "";
+      if (addFavContents[i].includes("fav_")) {
+        oldFileName = addFavContents[i];
+        newFileName = addFavContents[i].replace("fav_", "");
+      } else {
+        oldFileName = addFavContents[i];
+        newFileName = "fav_" + addFavContents[i];
+      }
+
+      const oldAddFavContentPath = path.join(this.targetArtworkPath, oldFileName);
+      const newAddFavContentPath = path.join(this.targetArtworkPath, newFileName);
+      console.log("oldAddFavContentPath: " + oldAddFavContentPath);
+      fs.renameSync(oldAddFavContentPath, newAddFavContentPath);
     }
   }
 }

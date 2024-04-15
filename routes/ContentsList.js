@@ -24,6 +24,7 @@ router.post("/:artworkName", function (req, res, next) {
   const artworkName = req.params.artworkName;
   const reqBody = req.body;
   const deleteContentsStrings = reqBody.delete;
+  const addFavContentsStrings = reqBody.addFav;
 
   const manager = new contentsManager(artworkName);
 
@@ -32,7 +33,13 @@ router.post("/:artworkName", function (req, res, next) {
     manager.deleteContents(deleteContentsStrings);
   }
 
+  console.log("a");
+  console.log(addFavContentsStrings);
   //お気に入り登録の場合（未実装）
+  if (addFavContentsStrings != undefined) {
+    console.log("b");
+    manager.addFavContents(addFavContentsStrings);
+  }
 
   //getでリダイレクト
   res.redirect(`/ArtworkGallery/ContentsList/${req.params.artworkName}/`);

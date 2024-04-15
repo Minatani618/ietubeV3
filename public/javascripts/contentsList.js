@@ -137,6 +137,23 @@ const deleteSelectedContents = async (event) => {
   deleteForm.submit();
 };
 
+//【イベントリスナ用】selectedクラスを持つ者をお気に入り登録
+const addFavSelectedContents = async (event) => {
+  event.preventDefault(); // ボタンを押したときのデフォルトのフォーム送信を防ぐ
+  const selectedContents = await listSelectedImgs();
+
+  //input要素作成追加
+  const addFavInput = document.createElement("input");
+  addFavInput.name = "addFav";
+  addFavInput.value = selectedContents;
+  addFavInput.type = "hidden";
+  const addFavForm = document.getElementById("addFavForm");
+  addFavForm.appendChild(addFavInput);
+
+  //POST送信
+  addFavForm.submit();
+};
+
 //【イベントリスナ用】selectedクラスを持つdiv内のimgのsrcファイル名をリスト化して文字列として返す
 const listSelectedImgs = () => {
   return new Promise((resolve, reject) => {
@@ -204,6 +221,7 @@ contentsCount100button.onclick = () => updateDisplay(100, currentPageNumber);
 //機能ボタンにイベントリスナーを追加
 switchButton.onclick = () => switchSelectedImgs();
 deleteButton.onclick = (event) => deleteSelectedContents(event);
+addFavButton.onclick = (event) => addFavSelectedContents(event);
 
 //初期表示
 updateDisplay(currentDisplayNumberPerPage, currentPageNumber);

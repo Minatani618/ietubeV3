@@ -56,8 +56,8 @@ class artworkCard {
       }
 
       //お気に入り画像があれば配列の先頭に順に追加
-      if (this.artworksFileNames[i].includes("favorite")) {
-        this.thumbnails.push(this.artworkImgSrc + "/" + this.favoriteArtworks[i]);
+      if (this.artworksFileNames[i].includes("fav")) {
+        this.thumbnails.push(this.artworkImgSrc + "/" + this.artworksFileNames[i]);
       }
 
       //おきにいり画像が５枚になったらメソッド終了
