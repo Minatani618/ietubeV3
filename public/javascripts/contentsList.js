@@ -83,13 +83,13 @@ const changeColumnNumber = (column) => {
   //引数に与えられた値によって画像の幅を変更(単純に割合で変更するとうまくいかないためswitch文で分岐)
   let imgWidth = 0;
   switch (column) {
-    case (column = 1):
+    case 1:
       imgWidth = 95;
       break;
-    case (column = 2):
+    case 2:
       imgWidth = 45;
       break;
-    case (column = 3):
+    case 3:
       imgWidth = 30;
       break;
     default:
