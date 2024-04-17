@@ -2,6 +2,13 @@
 <html>
   <head>
     <title><%= title %></title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/stylesheets/contentsList.css" />
   </head>
   <body>
@@ -23,34 +30,56 @@
       <!-- <div id="selectedList"></div> -->
     </div>
 
-    <div id="buttonsContainer">
-      <div id="columnButtons">
-        <button id="column1button">1列</button>
-        <button id="column2button">2列</button>
-        <button id="column3button">3列</button>
+    <div id="buttonsContainer" class="container">
+      <div id="columnButtons" class="row border border-2 row-cols-auto">
+        <div class="col">
+          <button id="column1button" class="btn btn-light btn-lg px-5 my-2">1列</button>
+        </div>
+        <div class="col">
+          <button id="column2button" class="btn btn-light btn-lg px-5 my-2">2列</button>
+        </div>
+        <div class="col">
+          <button id="column3button" class="btn btn-light btn-lg px-5 my-2">3列</button>
+        </div>
       </div>
-      <div id="contentsCountButtons">
-        <button id="contentsCount20button">20</button>
-        <button id="contentsCount50button">50</button>
-        <button id="contentsCount100button">100</button>
+      <div id="contentsCountButtons" class="row border border-2 row-cols-auto">
+        <div class="col">
+          <button id="contentsCount20button" class="btn btn-secondary btn-lg px-5 my-2">20</button>
+        </div>
+        <div class="col">
+          <button id="contentsCount50button" class="btn btn-secondary btn-lg px-5 my-2">50</button>
+        </div>
+        <div class="col">
+          <button id="contentsCount100button" class="btn btn-secondary btn-lg px-5 my-2">100</button>
+        </div>
       </div>
-      <div id="exeButtons">
-        <button id="switchButton">選択入替</button>
-
-        <form action="<%= thisPagePath %>" method="post" id="deleteForm">
-          <button id="deleteButton" class="btn btn-secondary">削除</button>
-        </form>
-
-        <form action="<%= thisPagePath %>" method="post" id="addFavForm">
-          <button id="addFavButton" class="btn btn-secondary">お気に入り</button>
-        </form>
+      <div id="exeButtons" class="row border border-2 row-cols-auto">
+        <div class="col">
+          <button id="switchButton" class="btn btn-dark btn-lg px-5 my-2">選択入替</button>
+        </div>
+        <div class="col">
+          <form action="<%= thisPagePath %>" method="post" id="deleteForm">
+            <button id="deleteButton" class="btn btn-dark btn-lg px-5 my-2">削除</button>
+          </form>
+        </div>
+        <div class="col">
+          <form action="<%= thisPagePath %>" method="post" id="addFavForm">
+            <button id="addFavButton" class="btn btn-dark btn-lg px-5 my-2">お気に入り</button>
+          </form>
+        </div>
       </div>
     </div>
 
     <!-- 移動ボタン -->
-    <div class="moveButtons">
-      <button class="prevButton">前へ</button>
-      <button class="nextButton">次へ</button>
+    <div class="moveButtons container my-4">
+      <div class="row row-cols-auto">
+        <div class="col">
+          <button class="prevButton btn btn-outline-secondary btn-lg px-5 my-2">前へ</button>
+        </div>
+        <div class="col">
+          <button class="nextButton btn btn-outline-secondary btn-lg px-5 my-2">次へ</button>
+        </div>
+      </div>
     </div>
 
     <!-- フロントエンドjsでコンテナを動的に生成してimgを格納 -->
