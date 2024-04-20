@@ -64,6 +64,9 @@ class contentsManager {
     imgDiv.className = "contentImgDiv";
     const img = document.createElement("img");
     img.src = this.hrefWithoutFileName + fileName;
+    if (fileName.includes("fav")) {
+      imgDiv.classList.add("fav");
+    }
     imgDiv.appendChild(img);
     imgDiv.onclick = () => addSelectClass(imgDiv);
     contentDisplayContainer.appendChild(imgDiv);

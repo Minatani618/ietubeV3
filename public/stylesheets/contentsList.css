@@ -1,6 +1,6 @@
 body {
   width: 100vw;
-  background-color: pink;
+  background-color: rgb(255, 124, 146);
 }
 
 #contentDisplayContainer {
@@ -16,6 +16,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#contentDisplayContainer .fav {
+  background-color: gold;
 }
 
 #contentDisplayContainer .selected {

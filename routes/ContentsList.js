@@ -28,21 +28,28 @@ router.post("/:artworkName", function (req, res, next) {
 
   const manager = new contentsManager(artworkName);
 
+  console.log(`1:manager:${manager}`);
   //削除の場合
   if (deleteContentsStrings != undefined) {
     manager.deleteContents(deleteContentsStrings);
   }
 
-  console.log("a");
-  console.log(addFavContentsStrings);
-  //お気に入り登録の場合（未実装）
+  //お気に入り登録の場合
   if (addFavContentsStrings != undefined) {
-    console.log("b");
     manager.addFavContents(addFavContentsStrings);
   }
 
-  //getでリダイレクト
-  res.redirect(`/ArtworkGallery/ContentsList/${req.params.artworkName}/`);
+  manager.createContentCardList();
+  const hrefWithoutFileName = manager.getHrefWithoutFileName();
+  const contentCards = manager.getContentsCards();
+  const thisPagePath = `/ArtworkGallery/ContentsList/${artworkName}/`;
+  res.render("ContentsList", {
+    title: "Contents List",
+    artworkName: artworkName,
+    hrefWithoutFileName: hrefWithoutFileName,
+    contentCards: contentCards,
+    thisPagePath: thisPagePath,
+  });
 });
 
 module.exports = router;
