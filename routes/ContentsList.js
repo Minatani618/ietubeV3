@@ -28,15 +28,18 @@ router.post("/:artworkName", function (req, res, next) {
 
   const manager = new contentsManager(artworkName);
 
-  console.log(`1:manager:${manager}`);
   //削除の場合
   if (deleteContentsStrings != undefined) {
-    manager.deleteContents(deleteContentsStrings);
+    //ファイル名がエンコードされているとファイル名変更できずエラーとなるため
+    const decodedDeleteContentsStrings = decodeURIComponent(deleteContentsStrings);
+    manager.deleteContents(decodedDeleteContentsStrings);
   }
 
   //お気に入り登録の場合
   if (addFavContentsStrings != undefined) {
-    manager.addFavContents(addFavContentsStrings);
+    //ファイル名がエンコードされているとファイル名変更できずエラーとなるため
+    const decodedAddFavContentsStrings = decodeURIComponent(addFavContentsStrings);
+    manager.addFavContents(decodedAddFavContentsStrings);
   }
 
   manager.createContentCardList();
