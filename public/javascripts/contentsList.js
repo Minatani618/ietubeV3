@@ -132,6 +132,9 @@ class contentsManager {
       case ".mov":
         fileType = "video";
         break;
+      case ".MOV":
+        fileType = "video";
+        break;
       default: //それ以外のものは画像として扱う
         fileType = "image";
         break;
