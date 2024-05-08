@@ -52,8 +52,16 @@ class contentsManager {
 
   displayImgs() {
     for (let i = this.displayRange.start; i < this.displayRange.end; i++) {
-      if (this.contentFileNames[i] !== undefined) {
+      //ファイル名がundefinedの場合はスキップ
+      if (this.contentFileNames[i] == undefined) {
+        continue;
+      }
+
+      //ファイルの種類によってimg要素かvideo要素を作成
+      if (this.judgeFileType(this.contentFileNames[i]) == "image") {
         this.createContentImg(this.contentFileNames[i]);
+      } else {
+        this.createContentVideo(this.contentFileNames[i]);
       }
     }
   }
@@ -72,11 +80,63 @@ class contentsManager {
     contentDisplayContainer.appendChild(imgDiv);
   }
 
+  createContentVideo(fileName) {
+    const videoDiv = document.createElement("div");
+    videoDiv.className = "contentVideoDiv";
+    const video = document.createElement("video");
+    video.src = this.hrefWithoutFileName + fileName;
+    video.controls = true;
+    videoDiv.appendChild(video);
+    contentDisplayContainer.appendChild(videoDiv);
+  }
+
   //コンテンツ表示コンテナを初期化
   initDisplayContainer() {
     while (contentDisplayContainer.firstChild) {
       contentDisplayContainer.removeChild(contentDisplayContainer.firstChild);
     }
+  }
+
+  //拡張子によってファイルの種類を判定
+  judgeFileType(fileName) {
+    const ext = fileName.substring(fileName.lastIndexOf("."));
+    let fileType = "";
+    switch (ext) {
+      case ".jpg":
+        fileType = "image";
+        break;
+      case ".png":
+        fileType = "image";
+        break;
+      case ".gif":
+        fileType = "image";
+        break;
+      case ".webp":
+        fileType = "image";
+        break;
+      case ".jpeg":
+        fileType = "image";
+        break;
+      case ".JPG":
+        fileType = "image";
+        break;
+      case ".PNG":
+        fileType = "image";
+        break;
+      case ".JPEG":
+        fileType = "image";
+        break;
+      case ".mp4":
+        fileType = "video";
+        break;
+      case ".mov":
+        fileType = "video";
+        break;
+      default: //それ以外のものは画像として扱う
+        fileType = "image";
+        break;
+    }
+    return fileType;
   }
 }
 

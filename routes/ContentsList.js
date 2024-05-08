@@ -10,6 +10,7 @@ router.get("/:artworkName", function (req, res, next) {
   manager.createContentCardList();
   const hrefWithoutFileName = manager.getHrefWithoutFileName();
   const contentCards = manager.getContentsCards();
+  console.log(contentCards);
   const thisPagePath = `/ArtworkGallery/ContentsList/${artworkName}/`;
   res.render("ContentsList", {
     title: "Contents List",

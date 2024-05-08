@@ -8,6 +8,7 @@ class contentCard {
     this.setFileName();
     this.extractArtworkName();
     this.setProperties();
+    this.setFileType();
   }
 
   setFileName = () => {
@@ -25,6 +26,46 @@ class contentCard {
   setProperties = () => {
     this.isDeleted = this.fileName.includes("deleted");
     this.isFavorite = this.fileName.includes("favorite");
+  };
+
+  //拡張子によってファイルタイプを設定
+  setFileType = () => {
+    const ext = path.extname(this.contentPath);
+    switch (ext) {
+      case ".jpg":
+        this.fileType = "image";
+        break;
+      case ".png":
+        this.fileType = "image";
+        break;
+      case ".gif":
+        this.fileType = "image";
+        break;
+      case ".webp":
+        this.fileType = "image";
+        break;
+      case "jpeg":
+        this.fileType = "image";
+        break;
+      case "JPG":
+        this.fileType = "image";
+        break;
+      case "PNG":
+        this.fileType = "image";
+        break;
+      case "JPEG":
+        this.fileType = "image";
+        break;
+      case ".mp4":
+        this.fileType = "video";
+        break;
+      case ".mov":
+        this.fileType = "video";
+        break;
+      default: //それ以外のものは画像として扱う
+        this.fileType = "image";
+        break;
+    }
   };
 }
 

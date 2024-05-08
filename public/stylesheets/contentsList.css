@@ -30,6 +30,10 @@ body {
   width: 99%;
   margin: 2%;
 }
+#contentDisplayContainer video {
+  width: 99%;
+  margin: 2%;
+}
 
 .meta {
   display: none;
